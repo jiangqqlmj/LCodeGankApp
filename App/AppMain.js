@@ -106,15 +106,15 @@ var AppMain = React.createClass({
         ref={(drawer) => { return this.drawer = drawer  }}
         keyboardDismissMode="on-drag"
         renderNavigationView={() => navigationView}>
-        <View style={styles.container}>
-          <Text style={styles.welcome}>Content!</Text>
-          <DrawerLockModeSwitches value={drawerLockMode} onValueChange={value => this.setState({drawerLockMode: value})} />
-          <Text>{this.state.drawerStateChangedOutput}</Text>
-          <Text>{this.state.drawerSlideOutput}</Text>
+        <View style={{height:45,flexDirection:'row',backgroundColor: '#63B8FF'}}>
           <TouchableHighlight onPress={() => this.drawer.openDrawer()}>
-            <Text>打开侧滑菜单</Text>
+            <Image source={require('./imgs/icon_menu2.png')} style={{width:45,height:45,marginLeft:10}}/>
           </TouchableHighlight>
-          <TextInput style={styles.inputField} />
+            <Text style={{fontSize:16,flex:1,color:'#fff',textAlignVertical:'center'}}>福利
+            </Text>
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.welcome}>内容界面</Text>
         </View>
       </DrawerLayout>
     );
@@ -123,6 +123,7 @@ var AppMain = React.createClass({
 
 var styles = StyleSheet.create({
   container: {
+    backgroundColor:'#fff',
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1

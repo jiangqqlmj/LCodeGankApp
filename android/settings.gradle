@@ -1,0 +1,3 @@
+rootProject.name = 'LCodeGankApp'
+
+include ':app'

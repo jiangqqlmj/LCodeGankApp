@@ -11,6 +11,7 @@ const {
   TextInput,
   TouchableHighlight,
   View,
+  Image,
 } = ReactNative;
 var DrawerLayout = require('react-native-drawer-layout');
 var DrawerLockModeSwitches = React.createClass({
@@ -52,12 +53,47 @@ var AppMain = React.createClass({
       drawerLockMode,
     } = this.state;
     const navigationView = (
-      <View style={[styles.container, {backgroundColor: '#fff'}]}>
-        <Text>Hello there!</Text>
-        <DrawerLockModeSwitches value={drawerLockMode} onValueChange={value => this.setState({drawerLockMode: value})} />
-        <TouchableHighlight onPress={() => this.drawer.closeDrawer()}>
-          <Text>关闭侧滑界面</Text>
-        </TouchableHighlight>
+      <View style={{backgroundColor: '#FCFCFC',flex:1}}>
+          <View style={{backgroundColor: '#63B8FF',width:300,height:160}}>
+             <Text style={styles.left_drawer_top_tv}>干货集中营</Text>
+          </View>
+          <View style={{marginTop:10,backgroundColor:'#d3d3d3',width:300,height:0.4}}></View> 
+          <View style={styles.left_drawer_item}>
+               <Image source={require('./imgs/icon_fuli.png')} style={styles.left_drawer_item_img}/>
+               <Text style={styles.left_drawer_item_tv}>福利</Text>
+          </View>
+          <View style={styles.left_drawer_item}>
+               <Image source={require('./imgs/icon_time.png')} style={styles.left_drawer_item_img}/>
+               <Text style={styles.left_drawer_item_tv}>时间浏览</Text>
+          </View>
+          <View style={styles.left_drawer_item}>
+               <Image source={require('./imgs/icon_category.png')} style={styles.left_drawer_item_img}/>
+               <Text style={styles.left_drawer_item_tv}>分类浏览</Text>
+          </View>
+          <View style={styles.left_drawer_item}>
+               <Image source={require('./imgs/icon_collect_no.png')} style={styles.left_drawer_item_img}/>
+               <Text style={styles.left_drawer_item_tv}>收藏</Text>
+          </View>
+          <View style={{backgroundColor:'#d3d3d3',width:300,height:0.5}}></View> 
+
+          <Text style={{fontSize:13,color:'#d1d1d1',marginTop:10,marginLeft:20}}>其他</Text>
+          <View style={styles.left_drawer_item}>
+               <Image source={require('./imgs/icon_setup.png')} style={styles.left_drawer_item_img}/>
+               <Text style={styles.left_drawer_item_tv}>设置</Text>
+          </View>
+          <View style={styles.left_drawer_item}>
+               <Image source={require('./imgs/icon_share.png')} style={styles.left_drawer_item_img}/>
+               <Text style={styles.left_drawer_item_tv}>分享</Text>
+          </View>
+          <View style={styles.left_drawer_item}>
+               <Image source={require('./imgs/icon_feedback.png')} style={styles.left_drawer_item_img}/>
+               <Text style={styles.left_drawer_item_tv}>意见反馈</Text>
+          </View>
+          <View style={styles.left_drawer_item}>
+               <Image source={require('./imgs/icon_about.png')} style={styles.left_drawer_item_img}/>
+               <Text style={styles.left_drawer_item_tv}>关于我们</Text>
+          </View>
+          <View style={{backgroundColor:'#d3d3d3',width:300,height:0.5}}></View> 
       </View>
     );
 
@@ -105,7 +141,35 @@ var styles = StyleSheet.create({
   },
   spacedLeft: {
     paddingLeft: 10,
-  }
+  },
+  left_drawer_top_tv:{
+    color:'#fff',
+    fontSize:28,
+    flex:1,
+    fontStyle:'italic',
+    fontWeight:'bold',
+    textAlign:'center',
+    textAlignVertical:'center'
+  },
+  left_drawer_item:{
+    width:300,
+    height:40,
+    flexDirection:'row',
+  },
+  left_drawer_item_img:{
+     width:22,
+     height:22,
+     marginLeft:20,
+     margin:9,
+
+  },
+  left_drawer_item_tv:{
+    fontSize:16,
+    flex:1,
+    color:'black',
+    marginLeft:5,
+    textAlignVertical:'center'
+  },
 });
 
 module.exports = AppMain;

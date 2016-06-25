@@ -13,7 +13,6 @@ const {
   View,
 } = ReactNative;
 var DrawerLayout = require('react-native-drawer-layout');
-
 var DrawerLockModeSwitches = React.createClass({
 
   render: function() {
@@ -40,14 +39,14 @@ var DrawerLockModeSwitches = React.createClass({
     );
   }
 });
-
 var AppMain = React.createClass({
-
   getInitialState() {
     return {
       drawerLockMode: 'unlocked',
     };
   },
+  //this.drawer.closeDrawer()进行关闭侧滑菜单
+  //this.drawer.openDrawer()进行打开侧滑菜单
   render: function() {
     const {
       drawerLockMode,
@@ -57,7 +56,7 @@ var AppMain = React.createClass({
         <Text>Hello there!</Text>
         <DrawerLockModeSwitches value={drawerLockMode} onValueChange={value => this.setState({drawerLockMode: value})} />
         <TouchableHighlight onPress={() => this.drawer.closeDrawer()}>
-          <Text>Close drawer</Text>
+          <Text>关闭侧滑界面</Text>
         </TouchableHighlight>
       </View>
     );
@@ -77,7 +76,7 @@ var AppMain = React.createClass({
           <Text>{this.state.drawerStateChangedOutput}</Text>
           <Text>{this.state.drawerSlideOutput}</Text>
           <TouchableHighlight onPress={() => this.drawer.openDrawer()}>
-            <Text>Open drawer</Text>
+            <Text>打开侧滑菜单</Text>
           </TouchableHighlight>
           <TextInput style={styles.inputField} />
         </View>

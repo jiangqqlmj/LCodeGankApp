@@ -122,8 +122,8 @@ class AppMain extends React.Component{
           <ScrollableTabView
             renderTabBar={() => <ReadingTabBar />}
             tabBarBackgroundColor="#fcfcfc"
-            tabBarUnderlineColor="#3e9ce9"
-            tabBarActiveTextColor="#3e9ce9"
+            tabBarUnderlineColor="#63B8FF"
+            tabBarActiveTextColor="#63B8FF"
             tabBarInactiveTextColor="#aaaaaa"
             onChangeTab={(event)=>{
               ToastAndroid.show('选中:'+event.i,ToastAndroid.SHORT);

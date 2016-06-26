@@ -2,26 +2,27 @@
 * 项目主框架页面效果
 */
 'use strict';
-var React = require('react');
-var ReactNative = require('react-native');
-const {
-  StyleSheet,
+import React, {PropTypes} from 'react';
+import {
+ StyleSheet,
   Switch,
   Text,
   TextInput,
   TouchableHighlight,
   View,
   Image,
-} = ReactNative;
+} from 'react-native';
 var DrawerLayout = require('react-native-drawer-layout');
-var DrawerLockModeSwitches = React.createClass({
+import ScrollableTabView from 'react-native-scrollable-tab-view';
+var CATEGORIES=["Android","iOS","休息视频","福利","拓展资源","前端","瞎推荐","App"];
+var _typeIds = new Array();
 
-  render: function() {
+class DrawerLockModeSwitches extends React.Component{
+  render(){
     const {
       value,
       onValueChange,
     } = this.props;
-
     return (
       <View>
         <View style={[styles.container, styles.split]}>
@@ -39,16 +40,18 @@ var DrawerLockModeSwitches = React.createClass({
       </View>
     );
   }
-});
-var AppMain = React.createClass({
-  getInitialState() {
-    return {
-      drawerLockMode: 'unlocked',
+}
+
+class AppMain extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+       drawerLockMode: 'unlocked',
+      }
     };
-  },
   //this.drawer.closeDrawer()进行关闭侧滑菜单
   //this.drawer.openDrawer()进行打开侧滑菜单
-  render: function() {
+  render(){
     const {
       drawerLockMode,
     } = this.state;
@@ -96,7 +99,7 @@ var AppMain = React.createClass({
           <View style={{backgroundColor:'#d3d3d3',width:300,height:0.5}}></View> 
       </View>
     );
-
+   
     return (
       <DrawerLayout
         onDrawerSlide={(e) => this.setState({drawerSlideOutput: JSON.stringify(e.nativeEvent)})}
@@ -106,20 +109,19 @@ var AppMain = React.createClass({
         ref={(drawer) => { return this.drawer = drawer  }}
         keyboardDismissMode="on-drag"
         renderNavigationView={() => navigationView}>
-        <View style={{height:45,flexDirection:'row',backgroundColor: '#63B8FF'}}>
-          <TouchableHighlight onPress={() => this.drawer.openDrawer()}>
-            <Image source={require('./imgs/icon_menu2.png')} style={{width:45,height:45,marginLeft:10}}/>
-          </TouchableHighlight>
-            <Text style={{fontSize:16,flex:1,color:'#fff',textAlignVertical:'center'}}>福利
-            </Text>
-        </View>
-        <View style={styles.container}>
-          <Text style={styles.welcome}>内容界面</Text>
+        <View>
+          <View style={{height:45,flexDirection:'row',backgroundColor: '#63B8FF'}}>
+            <TouchableHighlight onPress={() => this.drawer.openDrawer()}>
+              <Image source={require('./imgs/icon_menu2.png')} style={{width:45,height:45,marginLeft:10}}/>
+            </TouchableHighlight>
+              <Text style={{fontSize:16,flex:1,color:'#fff',textAlignVertical:'center'}}>福利
+              </Text>
+            </View>
         </View>
       </DrawerLayout>
     );
   }
-});
+}
 
 var styles = StyleSheet.create({
   container: {

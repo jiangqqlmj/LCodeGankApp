@@ -12,6 +12,7 @@ import {
   View,
   Image,
   Platform,
+  ToastAndroid,
   DrawerLayoutAndroid,
 } from 'react-native';
 import DrawerLayout from 'react-native-drawer-layout';
@@ -21,39 +22,15 @@ var CATEGORIES=["Android","iOS","休息视频","福利","拓展资源","前端",
 var _typeIds = [0,1,2,3,4,5,6,7];
 //this.drawer.closeDrawer()进行关闭侧滑菜单
 //this.drawer.openDrawer()进行打开侧滑菜单
-class DrawerLockModeSwitches extends React.Component{
-  render(){
-    const {
-      value,
-      onValueChange,
-    } = this.props;
-    return (
-      <View>
-        <View style={[styles.container, styles.split]}>
-          <Switch onValueChange={value => value ? onValueChange('unlocked') : onValueChange('unlocked')} value={value === 'unlocked'} />
-          <Text style={styles.spacedLeft}>Unlocked</Text>
-        </View>
-        <View style={[styles.container, styles.split]}>
-          <Switch onValueChange={value => value ? onValueChange('locked-closed') : onValueChange('unlocked')} value={value === 'locked-closed'} />
-          <Text style={styles.spacedLeft}>locked-closed</Text>
-        </View>
-        <View style={[styles.container, styles.split]}>
-          <Switch onValueChange={value => value ? onValueChange('locked-open') : onValueChange('unlocked')} value={value === 'locked-open'} />
-          <Text style={styles.spacedLeft}>locked-open</Text>
-        </View>
-      </View>
-    );
-  }
-}
-
 class AppMain extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
        drawerLockMode: 'unlocked',
+       appTitle:'干货集中营',
       }
   }
-
+  //侧滑菜单功能视图
   renderNavigationView() {
     return(
       <View style={{backgroundColor: '#FCFCFC',flex:1}}>
@@ -100,41 +77,52 @@ class AppMain extends React.Component{
       </View>
       );
   }   
-
   render(){
+    const {read, navigator} = this.props;
+    var lists = [];
+    _typeIds.forEach((typeId) => {
+      lists.push(
+        <View
+          key={typeId}
+          tabLabel={CATEGORIES[typeId]}
+          style={{flex:1}}
+        >
+        <Text>正文内容</Text>
+        </View>
+        );
+    });
     return (
       <DrawerLayout
         drawerWidth={300}
         drawerPosition={Platform.OS === 'android' ? DrawerLayoutAndroid.positions.Left : 'left'}
         ref={(drawer) => { return this.drawer = drawer  }}
-        keyboardDismissMode="on-drag"
         renderNavigationView={this.renderNavigationView}>
-        <View>
+        <View style={{backgroundColor:'#fff',flex:1}}>
           <View style={{height:45,flexDirection:'row',backgroundColor: '#63B8FF'}}>
             <TouchableHighlight onPress={() => this.drawer.openDrawer()}>
               <Image source={require('./imgs/icon_menu2.png')} style={{width:45,height:45,marginLeft:10}}/>
             </TouchableHighlight>
-              <Text style={{fontSize:16,flex:1,color:'#fff',textAlignVertical:'center'}}>福利
+              <Text style={{fontSize:16,flex:1,color:'#fff',textAlignVertical:'center'}}>{this.state.appTitle}
               </Text>
           </View>
+          <ScrollableTabView
+            renderTabBar={() => <ReadingTabBar />}
+            tabBarBackgroundColor="#fcfcfc"
+            tabBarUnderlineColor="#3e9ce9"
+            tabBarActiveTextColor="#3e9ce9"
+            tabBarInactiveTextColor="#aaaaaa"
+            onChangeTab={(event)=>{
+              ToastAndroid.show('选中:'+event.i,ToastAndroid.SHORT);
+            }}
+          >
+          {lists}
+          </ScrollableTabView>
         </View>
       </DrawerLayout>
     );
   }
 }
-
-var styles = StyleSheet.create({
-  container: {
-    backgroundColor:'#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
+let styles = StyleSheet.create({
   left_drawer_top_tv:{
     color:'#fff',
     fontSize:28,

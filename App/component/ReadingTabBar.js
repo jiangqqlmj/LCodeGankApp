@@ -40,13 +40,13 @@ class ReadingTabBar extends React.Component {
     var numberOfTabs = this.props.tabs.length;
     let tabUnderlineStyle = {
       position: 'absolute',
-      width: 80,
+      width: containerWidth / numberOfTabs,
       height: 2,
       backgroundColor: this.props.underlineColor || 'navy',
       bottom: 0,
     };
     var left = this.props.scrollValue.interpolate({
-      inputRange: [0, 1], outputRange: [0,  80]
+      inputRange: [0, 1], outputRange: [0,  containerWidth / numberOfTabs]
     });
     return (
       <View style={[styles.tabs,{backgroundColor: this.props.backgroundColor || null}]}>
@@ -60,7 +60,6 @@ class ReadingTabBar extends React.Component {
 let styles = StyleSheet.create({
   tab: {
     flex: 1,
-    width:80,
     alignItems: 'center',
     justifyContent: 'center',
   },

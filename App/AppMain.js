@@ -18,8 +18,8 @@ import {
 import DrawerLayout from 'react-native-drawer-layout';
 import ReadingTabBar from './component/ReadingTabBar';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
-var CATEGORIES=["Android","iOS","休息视频","福利","拓展资源","前端","瞎推荐","App"];
-var _typeIds = [0,1,2,3,4,5,6,7];
+var CATEGORIES=["Android","iOS","福利","前端"];
+var _typeIds = [0,1,2,3];
 //this.drawer.closeDrawer()进行关闭侧滑菜单
 //this.drawer.openDrawer()进行打开侧滑菜单
 class AppMain extends React.Component{
@@ -29,6 +29,18 @@ class AppMain extends React.Component{
        drawerLockMode: 'unlocked',
        appTitle:'干货集中营',
       }
+  }
+  //渲染每一个Item的内容布局
+  renderItemView(typeId){
+    if(typeId==0){
+            return(<View><Text>Android内容</Text></View>);
+    }else if(typeId===1){
+            return(<View><Text>iOS内容</Text></View>);
+    }else if(typeId===2){
+            return(<View><Text>福利内容</Text></View>);
+    }else if(typeId===3){
+            return(<View><Text>前端内容</Text></View>);
+    }
   }
   //侧滑菜单功能视图
   renderNavigationView() {
@@ -76,7 +88,9 @@ class AppMain extends React.Component{
           <View style={{backgroundColor:'#d3d3d3',width:300,height:0.5}}></View> 
       </View>
       );
-  }   
+  }  
+
+
   render(){
     const {read, navigator} = this.props;
     var lists = [];
@@ -87,7 +101,7 @@ class AppMain extends React.Component{
           tabLabel={CATEGORIES[typeId]}
           style={{flex:1}}
         >
-        <Text>正文内容</Text>
+        {this.renderItemView(typeId)}
         </View>
         );
     });

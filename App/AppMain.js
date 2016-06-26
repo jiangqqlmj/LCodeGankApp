@@ -4,19 +4,23 @@
 'use strict';
 import React, {PropTypes} from 'react';
 import {
- StyleSheet,
+  StyleSheet,
   Switch,
   Text,
   TextInput,
   TouchableHighlight,
   View,
   Image,
+  Platform,
+  DrawerLayoutAndroid,
 } from 'react-native';
-var DrawerLayout = require('react-native-drawer-layout');
+import DrawerLayout from 'react-native-drawer-layout';
+import ReadingTabBar from './component/ReadingTabBar';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 var CATEGORIES=["Android","iOS","休息视频","福利","拓展资源","前端","瞎推荐","App"];
-var _typeIds = new Array();
-
+var _typeIds = [0,1,2,3,4,5,6,7];
+//this.drawer.closeDrawer()进行关闭侧滑菜单
+//this.drawer.openDrawer()进行打开侧滑菜单
 class DrawerLockModeSwitches extends React.Component{
   render(){
     const {
@@ -48,14 +52,10 @@ class AppMain extends React.Component{
     this.state = {
        drawerLockMode: 'unlocked',
       }
-    };
-  //this.drawer.closeDrawer()进行关闭侧滑菜单
-  //this.drawer.openDrawer()进行打开侧滑菜单
-  render(){
-    const {
-      drawerLockMode,
-    } = this.state;
-    const navigationView = (
+  }
+
+  renderNavigationView() {
+    return(
       <View style={{backgroundColor: '#FCFCFC',flex:1}}>
           <View style={{backgroundColor: '#63B8FF',width:300,height:160}}>
              <Text style={styles.left_drawer_top_tv}>干货集中营</Text>
@@ -98,17 +98,17 @@ class AppMain extends React.Component{
           </View>
           <View style={{backgroundColor:'#d3d3d3',width:300,height:0.5}}></View> 
       </View>
-    );
-   
+      );
+  }   
+
+  render(){
     return (
       <DrawerLayout
-        onDrawerSlide={(e) => this.setState({drawerSlideOutput: JSON.stringify(e.nativeEvent)})}
-        onDrawerStateChanged={(e) => this.setState({drawerStateChangedOutput: JSON.stringify(e)})}
         drawerWidth={300}
-        drawerLockMode={drawerLockMode}
+        drawerPosition={Platform.OS === 'android' ? DrawerLayoutAndroid.positions.Left : 'left'}
         ref={(drawer) => { return this.drawer = drawer  }}
         keyboardDismissMode="on-drag"
-        renderNavigationView={() => navigationView}>
+        renderNavigationView={this.renderNavigationView}>
         <View>
           <View style={{height:45,flexDirection:'row',backgroundColor: '#63B8FF'}}>
             <TouchableHighlight onPress={() => this.drawer.openDrawer()}>
@@ -116,7 +116,7 @@ class AppMain extends React.Component{
             </TouchableHighlight>
               <Text style={{fontSize:16,flex:1,color:'#fff',textAlignVertical:'center'}}>福利
               </Text>
-            </View>
+          </View>
         </View>
       </DrawerLayout>
     );
@@ -134,16 +134,6 @@ var styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  },
-  inputField: {
-    backgroundColor: '#F2F2F2',
-    height: 40,
-  },
-  split: {
-    flexDirection: 'row',
-  },
-  spacedLeft: {
-    paddingLeft: 10,
   },
   left_drawer_top_tv:{
     color:'#fff',

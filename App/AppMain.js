@@ -21,6 +21,7 @@ import ReadingTabBar from './component/ReadingTabBar';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 import About from './content/About';
+import FeedBack from './content/FeedBack';
 
 var CATEGORIES=["Android","iOS","福利","前端"];
 var _typeIds = [0,1,2,3];
@@ -60,7 +61,12 @@ class AppMain extends React.Component{
         
         break;
       case 2:
-        
+        InteractionManager.runAfterInteractions(() => {
+          navigator.push({
+            component: FeedBack,
+            name: 'FeedBack'
+          });
+        });
         break;
       case 3:
         InteractionManager.runAfterInteractions(() => {
@@ -110,10 +116,14 @@ class AppMain extends React.Component{
                <Image source={require('./imgs/icon_share.png')} style={styles.left_drawer_item_img}/>
                <Text style={styles.left_drawer_item_tv}>分享</Text>
           </View>
-          <View style={styles.left_drawer_item}>
+          <TouchableOpacity 
+            onPress={this.onPressDrawerItem.bind(this,2)}
+            >
+            <View style={styles.left_drawer_item}>
                <Image source={require('./imgs/icon_feedback.png')} style={styles.left_drawer_item_img}/>
                <Text style={styles.left_drawer_item_tv}>意见反馈</Text>
-          </View>
+            </View>
+          </TouchableOpacity>
           <TouchableOpacity 
             onPress={this.onPressDrawerItem.bind(this,3)}
             >

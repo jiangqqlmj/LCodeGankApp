@@ -4,7 +4,9 @@ import React from 'react';
 import {
   Dimensions,
   Image,
-  InteractionManager
+  InteractionManager,
+  View,
+  Text,
 } from 'react-native';
 
 import AppMain from '../AppMain';
@@ -32,10 +34,15 @@ class Splash extends React.Component {
  
   render() {
     return (
+      <View style={{backgroundColor:'#63B8FF',flex:1}}>
       <Image
-        style={{width: width, height: height}}
-        source={require('../imgs/splash.png')}
-      />
+        style={{width:300,height:313,alignSelf:'center',marginTop:50}}
+        source={require('../imgs/welcome_gank.png')}
+       />
+       <View style={{flex:1,alignItems:'flex-end',flexDirection:'row',marginBottom:10}}>
+          <Text style={{flex:1,color:'#fff',fontSize:18,textAlign:'center'}}>干货集中营(gank.io) Version:1.0</Text>
+       </View>
+      </View>
     );
   }
 }

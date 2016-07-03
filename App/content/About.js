@@ -6,6 +6,7 @@ import {
   Image,
   View,
   Text,
+  StyleSheet,
 } from 'react-native';
 
 class About extends React.Component {
@@ -14,10 +15,16 @@ class About extends React.Component {
   } 
   render() {
     return (
-      <View>
+      <View style={styles.content}>
         <Text>关于我们</Text>
       </View>
     );
   }
 }
+let styles = StyleSheet.create({
+    content:{
+      backgroundColor:'#fff',
+      flex:1,
+    }
+});
 export default About;

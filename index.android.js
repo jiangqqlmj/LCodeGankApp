@@ -7,5 +7,5 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
 } from 'react-native';
-var AppMain = require('./App/AppMain');
-AppRegistry.registerComponent('LCodeGankApp', () => AppMain);
+import rootApp from './App/root';
+AppRegistry.registerComponent('LCodeGankApp', () => rootApp);

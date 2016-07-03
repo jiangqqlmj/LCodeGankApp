@@ -8,16 +8,20 @@ import {
   Switch,
   Text,
   TextInput,
-  TouchableHighlight,
+  TouchableOpacity,
   View,
   Image,
   Platform,
   ToastAndroid,
   DrawerLayoutAndroid,
+  InteractionManager,
 } from 'react-native';
 import DrawerLayout from 'react-native-drawer-layout';
 import ReadingTabBar from './component/ReadingTabBar';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
+
+import About from './content/About';
+
 var CATEGORIES=["Android","iOS","福利","前端"];
 var _typeIds = [0,1,2,3];
 //this.drawer.closeDrawer()进行关闭侧滑菜单
@@ -29,6 +33,7 @@ class AppMain extends React.Component{
        drawerLockMode: 'unlocked',
        appTitle:'干货集中营',
       }
+    this.renderNavigationView = this.renderNavigationView.bind(this);  
   }
   //渲染每一个Item的内容布局
   renderItemView(typeId){
@@ -42,6 +47,34 @@ class AppMain extends React.Component{
             return(<View><Text>前端内容</Text></View>);
     }
   }
+
+  //进行侧面功能
+  onPressDrawerItem(index) {
+    const {navigator} = this.props;
+    this.refs.drawer.closeDrawer();
+    switch (index) {
+      case 0:
+        
+        break;
+      case 1:
+        
+        break;
+      case 2:
+        
+        break;
+      case 3:
+        InteractionManager.runAfterInteractions(() => {
+          navigator.push({
+            component: About,
+            name: 'About'
+          });
+        });
+        break;
+      default:
+        break;
+    }
+  }
+
   //侧滑菜单功能视图
   renderNavigationView() {
     return(
@@ -81,18 +114,21 @@ class AppMain extends React.Component{
                <Image source={require('./imgs/icon_feedback.png')} style={styles.left_drawer_item_img}/>
                <Text style={styles.left_drawer_item_tv}>意见反馈</Text>
           </View>
-          <View style={styles.left_drawer_item}>
-               <Image source={require('./imgs/icon_about.png')} style={styles.left_drawer_item_img}/>
-               <Text style={styles.left_drawer_item_tv}>关于我们</Text>
-          </View>
+          <TouchableOpacity 
+            onPress={this.onPressDrawerItem.bind(this,3)}
+            >
+            <View style={styles.left_drawer_item}>
+              <Image source={require('./imgs/icon_about.png')} style={styles.left_drawer_item_img}/>
+              <Text style={styles.left_drawer_item_tv}>关于我们</Text>
+            </View>
+          </TouchableOpacity>
           <View style={{backgroundColor:'#d3d3d3',width:300,height:0.5}}></View> 
       </View>
       );
-  }  
-
+  } 
 
   render(){
-    const {read, navigator} = this.props;
+    const {navigator} = this.props;
     var lists = [];
     _typeIds.forEach((typeId) => {
       lists.push(
@@ -105,17 +141,18 @@ class AppMain extends React.Component{
         </View>
         );
     });
+
     return (
       <DrawerLayout
+        ref='drawer'
         drawerWidth={300}
         drawerPosition={Platform.OS === 'android' ? DrawerLayoutAndroid.positions.Left : 'left'}
-        ref={(drawer) => { return this.drawer = drawer  }}
         renderNavigationView={this.renderNavigationView}>
         <View style={{backgroundColor:'#fff',flex:1}}>
           <View style={{height:45,flexDirection:'row',backgroundColor: '#63B8FF'}}>
-            <TouchableHighlight onPress={() => this.drawer.openDrawer()}>
+            <TouchableOpacity onPress={() => this.refs.drawer.openDrawer()}>
               <Image source={require('./imgs/icon_menu2.png')} style={{width:45,height:45,marginLeft:10}}/>
-            </TouchableHighlight>
+            </TouchableOpacity>
               <Text style={{fontSize:16,flex:1,color:'#fff',textAlignVertical:'center'}}>{this.state.appTitle}
               </Text>
           </View>
@@ -167,4 +204,4 @@ let styles = StyleSheet.create({
   },
 });
 
-module.exports = AppMain;
+export default AppMain;

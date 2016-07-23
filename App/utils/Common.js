@@ -1,6 +1,7 @@
 'use strict';
 
-let HOST = 'http://apis.baidu.com/';
+//http://gank.io/api/data/Android/10/2
+let HOST = 'http://gank.io/api/data/';
 export function request(url, method, body) {
   var isOk;
   return new Promise((resolve, reject) => {
@@ -9,7 +10,7 @@ export function request(url, method, body) {
         body: body,
       })
       .then((response) => {
-        if (response.ok) {
+        if (!response.error) {
           isOk = true;
         } else {
           isOk = false;

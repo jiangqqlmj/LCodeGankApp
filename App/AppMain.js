@@ -15,6 +15,7 @@ import {
   ToastAndroid,
   DrawerLayoutAndroid,
   InteractionManager,
+  ListView,
 } from 'react-native';
 import DrawerLayout from 'react-native-drawer-layout';
 import ReadingTabBar from './component/ReadingTabBar';
@@ -23,9 +24,12 @@ import ScrollableTabBar from 'react-native-scrollable-tab-view/ScrollableTabBar'
 
 import About from './content/About';
 import FeedBack from './content/FeedBack';
+import WebViewDetails from './content/WebViewDetails';
+import {request} from './utils/Common';
 
-var CATEGORIES=["Android","iOS","休息视频","拓展资源","前端","瞎推荐","App"];
-var _typeIds = [0,1,2,3,4,5,6];
+var CATEGORIES=["Android","iOS","休息视频","拓展资源","前端","瞎推荐"];
+var _typeIds = [0,1,2,3,4,5];
+let page = 1;
 //this.drawer.closeDrawer()进行关闭侧滑菜单
 //this.drawer.openDrawer()进行打开侧滑菜单
 class AppMain extends React.Component{
@@ -34,8 +38,23 @@ class AppMain extends React.Component{
     this.state = {
        drawerLockMode: 'unlocked',
        appTitle:'干货集中营',
+       dataSource: new ListView.DataSource({
+           rowHasChanged: (row1, row2) => row1 !== row2,
+         }),
+       articleList:[],
       }
     this.renderNavigationView = this.renderNavigationView.bind(this);  
+  }
+
+  //组件挂载之后进行请求网络
+  componentDidMount() {
+      request(CATEGORIES[0]+'/10/'+page,'get')
+        .then((result) => {
+           this.setState({articleList:result.results});
+        })
+        .catch((e) => {
+           ToastAndroid.show('加载失败,请重试'+e,ToastAndroid.SHORT);
+      });
   }
   //渲染每一个Item的内容布局
   renderItemView(typeId){
@@ -51,11 +70,8 @@ class AppMain extends React.Component{
             return(<View><Text>前端</Text></View>);
     }else if(typeId===5){
             return(<View><Text>瞎推荐</Text></View>);
-    }else if(typeId===6){
-            return(<View><Text>App</Text></View>);
     }
   }
-
   //进行侧面功能
   onPressDrawerItem(index) {
     const {navigator} = this.props;
@@ -65,7 +81,14 @@ class AppMain extends React.Component{
         
         break;
       case 1:
-        
+        let url='https://github.com/ldoublem/PaperShredder';
+        InteractionManager.runAfterInteractions(() => {
+          navigator.push({
+            component: WebViewDetails,
+            name: 'WebViewDetails',
+            url
+          });
+        });
         break;
       case 2:
         InteractionManager.runAfterInteractions(() => {
@@ -119,10 +142,14 @@ class AppMain extends React.Component{
                <Image source={require('./imgs/icon_setup.png')} style={styles.left_drawer_item_img}/>
                <Text style={styles.left_drawer_item_tv}>设置</Text>
           </View>
-          <View style={styles.left_drawer_item}>
+          <TouchableOpacity 
+            onPress={this.onPressDrawerItem.bind(this,1)}
+            >
+             <View style={styles.left_drawer_item}>
                <Image source={require('./imgs/icon_share.png')} style={styles.left_drawer_item_img}/>
                <Text style={styles.left_drawer_item_tv}>分享</Text>
-          </View>
+             </View>
+          </TouchableOpacity>
           <TouchableOpacity 
             onPress={this.onPressDrawerItem.bind(this,2)}
             >

@@ -19,12 +19,13 @@ import {
 import DrawerLayout from 'react-native-drawer-layout';
 import ReadingTabBar from './component/ReadingTabBar';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
+import ScrollableTabBar from 'react-native-scrollable-tab-view/ScrollableTabBar';
 
 import About from './content/About';
 import FeedBack from './content/FeedBack';
 
-var CATEGORIES=["Android","iOS","福利","前端"];
-var _typeIds = [0,1,2,3];
+var CATEGORIES=["Android","iOS","休息视频","拓展资源","前端","瞎推荐","App"];
+var _typeIds = [0,1,2,3,4,5,6];
 //this.drawer.closeDrawer()进行关闭侧滑菜单
 //this.drawer.openDrawer()进行打开侧滑菜单
 class AppMain extends React.Component{
@@ -38,14 +39,20 @@ class AppMain extends React.Component{
   }
   //渲染每一个Item的内容布局
   renderItemView(typeId){
-    if(typeId==0){
+    if(typeId===0){
             return(<View><Text>Android内容</Text></View>);
     }else if(typeId===1){
             return(<View><Text>iOS内容</Text></View>);
     }else if(typeId===2){
-            return(<View><Text>福利内容</Text></View>);
+            return(<View><Text>休息视频</Text></View>);
     }else if(typeId===3){
-            return(<View><Text>前端内容</Text></View>);
+            return(<View><Text>拓展资源</Text></View>);
+    }else if(typeId===4){
+            return(<View><Text>前端</Text></View>);
+    }else if(typeId===5){
+            return(<View><Text>瞎推荐</Text></View>);
+    }else if(typeId===6){
+            return(<View><Text>App</Text></View>);
     }
   }
 
@@ -167,7 +174,7 @@ class AppMain extends React.Component{
               </Text>
           </View>
           <ScrollableTabView
-            renderTabBar={() => <ReadingTabBar />}
+            renderTabBar={() => <ScrollableTabBar/>}
             tabBarBackgroundColor="#fcfcfc"
             tabBarUnderlineColor="#63B8FF"
             tabBarActiveTextColor="#63B8FF"

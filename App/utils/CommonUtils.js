@@ -7,7 +7,6 @@ export function NaviGoBack(navigator) {
   }
   return false;
 }
-
 export function isEmptyObject(obj) {
 	for (var name in obj) {
 		return false;

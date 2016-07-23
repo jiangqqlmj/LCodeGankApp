@@ -26,7 +26,7 @@ class Splash extends React.Component {
           name: 'AppMain'
         });
       });
-    }, 3500);
+    }, 2500);
   }
   componentWillUnmount() {
     this.timer && clearTimeout(this.timer);

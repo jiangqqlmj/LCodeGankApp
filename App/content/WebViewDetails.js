@@ -58,7 +58,7 @@ class WebViewDetails extends React.Component {
            ref="webview"
            automaticallyAdjustContentInsets={false}
            style={{ flex: 1 }}
-           source={{ uri: route.url}}
+           source={{ uri: route.article.url}}
            javaScriptEnabled = {true}
            domStorageEnabled = {true}
            startInLoadingState = {true}

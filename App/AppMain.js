@@ -16,6 +16,9 @@ import {
   DrawerLayoutAndroid,
   InteractionManager,
   ListView,
+  ScrollView,
+  RefreshControl,
+  ActivityIndicator,
 } from 'react-native';
 import DrawerLayout from 'react-native-drawer-layout';
 import ReadingTabBar from './component/ReadingTabBar';
@@ -26,6 +29,7 @@ import About from './content/About';
 import FeedBack from './content/FeedBack';
 import WebViewDetails from './content/WebViewDetails';
 import {request} from './utils/Common';
+import LoadingView from './component/LoadingView';
 
 var CATEGORIES=["Android","iOS","休息视频","拓展资源","前端","瞎推荐"];
 var _typeIds = [0,1,2,3,4,5];
@@ -42,36 +46,26 @@ class AppMain extends React.Component{
            rowHasChanged: (row1, row2) => row1 !== row2,
          }),
        articleList:[],
+       loading:true,
       }
-    this.renderNavigationView = this.renderNavigationView.bind(this);  
+    this.renderNavigationView = this.renderNavigationView.bind(this); 
+    this.renderItem = this.renderItem.bind(this); 
+    this.renderFooter = this.renderFooter.bind(this);
+    this.onPress=this.onPress.bind(this);
   }
 
   //组件挂载之后进行请求网络
   componentDidMount() {
       request(CATEGORIES[0]+'/10/'+page,'get')
         .then((result) => {
-           this.setState({articleList:result.results});
+           this.setState({articleList:result.results,loading:false});
         })
         .catch((e) => {
            ToastAndroid.show('加载失败,请重试'+e,ToastAndroid.SHORT);
+          this.setState({loading:false});
       });
   }
-  //渲染每一个Item的内容布局
-  renderItemView(typeId){
-    if(typeId===0){
-            return(<View><Text>Android内容</Text></View>);
-    }else if(typeId===1){
-            return(<View><Text>iOS内容</Text></View>);
-    }else if(typeId===2){
-            return(<View><Text>休息视频</Text></View>);
-    }else if(typeId===3){
-            return(<View><Text>拓展资源</Text></View>);
-    }else if(typeId===4){
-            return(<View><Text>前端</Text></View>);
-    }else if(typeId===5){
-            return(<View><Text>瞎推荐</Text></View>);
-    }
-  }
+
   //进行侧面功能
   onPressDrawerItem(index) {
     const {navigator} = this.props;
@@ -81,14 +75,6 @@ class AppMain extends React.Component{
         
         break;
       case 1:
-        let url='https://github.com/ldoublem/PaperShredder';
-        InteractionManager.runAfterInteractions(() => {
-          navigator.push({
-            component: WebViewDetails,
-            name: 'WebViewDetails',
-            url
-          });
-        });
         break;
       case 2:
         InteractionManager.runAfterInteractions(() => {
@@ -110,6 +96,93 @@ class AppMain extends React.Component{
         break;
     }
   }
+  onEndReached(typeId) {
+     
+  }
+  renderFooter() {
+    return (
+        <View
+          style={{ flex: 1, flexDirection: 'row', justifyContent: 'center',
+            alignItems: 'center', padding: 5 }}
+        >
+          <ActivityIndicator size="small" color="#3e9ce9" />
+          <Text style={{ textAlign: 'center', fontSize: 16, marginLeft: 10 }}>
+            数据加载中……
+          </Text>
+        </View>
+      );
+  }
+  //点击Item跳转详情页面
+  onPress(article) {
+    const { navigator } = this.props;
+    InteractionManager.runAfterInteractions(() => {
+      navigator.push({
+        component: WebViewDetails,
+        name: 'WebViewDetails',
+        article
+      });
+    });
+  }
+  //渲染每一项的数据
+  renderItem(article,typeId) {
+    return (
+      <TouchableOpacity onPress={()=>this.onPress(article)}>
+            <View style={styles.containerItem}>
+               <Text 
+                  style={styles.containerItem_title}>{article.desc}</Text>
+               <View style={{flex:1,flexDirection:'row',marginTop:3,alignItems:'flex-end',}}>
+                  <Text style={styles.containerItem_title_sub}>推荐人:{article.who}</Text>
+                  <Text style={styles.containerItem_time_sub}>{article.publishedAt}</Text>
+               </View>
+            </View>
+      </TouchableOpacity>
+    );
+  }
+  renderContent(dataSource, typeId) {
+    if (this.state.loading) {
+      return <LoadingView />;
+    }
+    const isEmpty = this.state.articleList === undefined || this.state.articleList.length === 0;
+    if (isEmpty) {
+      return (
+        <ScrollView
+          refreshing={this.state.loading}
+          automaticallyAdjustContentInsets={false}
+          horizontal={false}
+          contentContainerStyle={styles.no_data}
+          style={{ flex: 1 }}
+          refreshControl={
+            <RefreshControl
+              title="Loading..."
+              colors={['#ffaa66cc', '#ff00ddff', '#ffffbb33', '#ffff4444']}
+            />
+          }
+         >
+          <View style={{ alignItems: 'center' }}>
+            <Text style={{ fontSize: 16 }}>
+              目前没有数据，请刷新重试……
+            </Text>
+          </View>
+        </ScrollView>
+      );
+    }
+    return (
+      <ListView
+        initialListSize={1}
+        dataSource={dataSource}
+        renderRow={this.renderItem}
+        style={styles.listView}
+        onEndReachedThreshold={10}
+        renderFooter={this.renderFooter}
+        refreshControl={
+          <RefreshControl
+            title="Loading..."
+            colors={['#ffaa66cc', '#ff00ddff', '#ffffbb33', '#ffff4444']}
+          />
+        }
+      />
+    );
+   }
 
   //侧滑菜单功能视图
   renderNavigationView() {
@@ -181,7 +254,8 @@ class AppMain extends React.Component{
           tabLabel={CATEGORIES[typeId]}
           style={{flex:1}}
         >
-        {this.renderItemView(typeId)}
+        {this.renderContent(this.state.dataSource.cloneWithRows(
+                  this.state.articleList === undefined ? [] : this.state.articleList), typeId)}
         </View>
         );
     });
@@ -245,6 +319,43 @@ let styles = StyleSheet.create({
     color:'black',
     marginLeft:5,
     textAlignVertical:'center'
+  },
+  no_data: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 100
+  },
+  containerItem:{
+      flexDirection: 'column',
+      backgroundColor: '#fcfcfc',
+      padding: 5,
+      marginTop:2,
+      margin:5,
+      borderBottomColor: '#ddd',
+      borderBottomWidth: 1,
+      flex:1,
+    },
+    containerItem_title:{
+      color:'#63B8FF',
+      flex:1,
+      fontSize:16,
+      paddingBottom:8,
+    },
+    containerItem_title_sub:{
+      color:'#cccccc',
+      fontSize:13,
+      flex:1,
+    },
+    containerItem_time_sub:{
+      color:'#cccccc',
+      fontSize:13,
+      flex:1,
+      alignItems:'flex-end',
+      textAlign:'right',
+    },
+    listView: {
+    backgroundColor: '#eeeeec'
   },
 });
 

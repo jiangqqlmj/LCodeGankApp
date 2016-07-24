@@ -1,7 +1,8 @@
 'use strict';
 
 //http://gank.io/api/data/Android/10/2
-let HOST = 'http://gank.io/api/data/';
+//http://gank.io/api/day/2015/08/07
+let HOST = 'http://gank.io/api/';
 export function request(url, method, body) {
   var isOk;
   return new Promise((resolve, reject) => {

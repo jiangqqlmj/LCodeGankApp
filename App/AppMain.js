@@ -22,17 +22,12 @@ import {
 } from 'react-native';
 import DrawerLayout from 'react-native-drawer-layout';
 import ReadingTabBar from './component/ReadingTabBar';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
-import ScrollableTabBar from 'react-native-scrollable-tab-view/ScrollableTabBar';
 
 import About from './content/About';
 import FeedBack from './content/FeedBack';
 import WebViewDetails from './content/WebViewDetails';
 import {request} from './utils/Common';
 import LoadingView from './component/LoadingView';
-
-var CATEGORIES=["Android","iOS","休息视频","拓展资源","前端","瞎推荐"];
-var _typeIds = [0,1,2,3,4,5];
 let page = 1;
 //this.drawer.closeDrawer()进行关闭侧滑菜单
 //this.drawer.openDrawer()进行打开侧滑菜单
@@ -41,7 +36,7 @@ class AppMain extends React.Component{
     super(props);
     this.state = {
        drawerLockMode: 'unlocked',
-       appTitle:'干货集中营',
+       appTitle:'最近一天数据',
        dataSource: new ListView.DataSource({
            rowHasChanged: (row1, row2) => row1 !== row2,
          }),
@@ -56,9 +51,10 @@ class AppMain extends React.Component{
 
   //组件挂载之后进行请求网络
   componentDidMount() {
-      request(CATEGORIES[0]+'/10/'+page,'get')
+      //day/2015/08/07
+      request('day/2016/07/22','get')
         .then((result) => {
-           this.setState({articleList:result.results,loading:false});
+           this.setState({articleList:result.results.Android,loading:false});
         })
         .catch((e) => {
            ToastAndroid.show('加载失败,请重试'+e,ToastAndroid.SHORT);
@@ -124,7 +120,7 @@ class AppMain extends React.Component{
     });
   }
   //渲染每一项的数据
-  renderItem(article,typeId) {
+  renderItem(article) {
     return (
       <TouchableOpacity onPress={()=>this.onPress(article)}>
             <View style={styles.containerItem}>
@@ -138,7 +134,7 @@ class AppMain extends React.Component{
       </TouchableOpacity>
     );
   }
-  renderContent(dataSource, typeId) {
+  renderContent(dataSource) {
     if (this.state.loading) {
       return <LoadingView />;
     }
@@ -146,13 +142,13 @@ class AppMain extends React.Component{
     if (isEmpty) {
       return (
         <ScrollView
-          refreshing={this.state.loading}
           automaticallyAdjustContentInsets={false}
           horizontal={false}
           contentContainerStyle={styles.no_data}
           style={{ flex: 1 }}
           refreshControl={
             <RefreshControl
+              refreshing={this.state.loading}
               title="Loading..."
               colors={['#ffaa66cc', '#ff00ddff', '#ffffbb33', '#ffff4444']}
             />
@@ -176,6 +172,7 @@ class AppMain extends React.Component{
         renderFooter={this.renderFooter}
         refreshControl={
           <RefreshControl
+            refreshing={this.state.loading}
             title="Loading..."
             colors={['#ffaa66cc', '#ff00ddff', '#ffffbb33', '#ffff4444']}
           />
@@ -183,7 +180,6 @@ class AppMain extends React.Component{
       />
     );
    }
-
   //侧滑菜单功能视图
   renderNavigationView() {
     return(
@@ -246,20 +242,6 @@ class AppMain extends React.Component{
 
   render(){
     const {navigator} = this.props;
-    var lists = [];
-    _typeIds.forEach((typeId) => {
-      lists.push(
-        <View
-          key={typeId}
-          tabLabel={CATEGORIES[typeId]}
-          style={{flex:1}}
-        >
-        {this.renderContent(this.state.dataSource.cloneWithRows(
-                  this.state.articleList === undefined ? [] : this.state.articleList), typeId)}
-        </View>
-        );
-    });
-
     return (
       <DrawerLayout
         ref='drawer'
@@ -274,18 +256,10 @@ class AppMain extends React.Component{
               <Text style={{fontSize:16,flex:1,color:'#fff',textAlignVertical:'center'}}>{this.state.appTitle}
               </Text>
           </View>
-          <ScrollableTabView
-            renderTabBar={() => <ScrollableTabBar/>}
-            tabBarBackgroundColor="#fcfcfc"
-            tabBarUnderlineColor="#63B8FF"
-            tabBarActiveTextColor="#63B8FF"
-            tabBarInactiveTextColor="#aaaaaa"
-            onChangeTab={(event)=>{
-              ToastAndroid.show('选中:'+event.i,ToastAndroid.SHORT);
-            }}
-          >
-          {lists}
-          </ScrollableTabView>
+          <View style={{flex:1}}>
+            {this.renderContent(this.state.dataSource.cloneWithRows(
+                  this.state.articleList === undefined ? [] : this.state.articleList))}
+          </View>
         </View>
       </DrawerLayout>
     );

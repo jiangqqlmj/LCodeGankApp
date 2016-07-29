@@ -13,14 +13,14 @@ import {
   Dimensions,
   ToastAndroid,
 } from 'react-native';
-
+import {request_lcode} from '../utils/Common';
 import { NaviGoBack } from '../utils/CommonUtils';
 let content='';
 let address='';
 class FeedBack extends React.Component {
     constructor(props) {
-     super(props);
-     this.submitFeed=this.submitFeed.bind(this);     
+       super(props);
+       this.submitFeed=this.submitFeed.bind(this);     
     }
     //提交反馈信息
     submitFeed(){
@@ -32,8 +32,19 @@ class FeedBack extends React.Component {
          ToastAndroid.show('联系方式不能为空!',ToastAndroid.SHORT);
          return;
       }
-      ToastAndroid.show('反馈意见:'+content+',联系方式:'+address,ToastAndroid.SHORT);
-      
+      //进行请求网络
+      request_lcode('FeedBackAction','post',JSON.stringify({
+                   content:content,
+                   address:address,
+        }))
+      .then((response)=>{
+        if(!response.error){
+           ToastAndroid.show(response.msg,ToastAndroid.SHORT);
+           NaviGoBack(this.props.navigator);
+        }
+      }).catch((e)=>{
+           ToastAndroid.show('错误信息:'+e,ToastAndroid.SHORT);
+      });   
     }
     render(){
   	  return (

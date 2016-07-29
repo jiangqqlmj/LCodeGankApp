@@ -33,8 +33,8 @@ class FeedBack extends React.Component {
          return;
       }
       ToastAndroid.show('反馈意见:'+content+',联系方式:'+address,ToastAndroid.SHORT);
+      
     }
-    
     render(){
   	  return (
          <View style={{backgroundColor:'#fff',flex:1}}>

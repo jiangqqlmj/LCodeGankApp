@@ -15,13 +15,19 @@ import {
   ToastAndroid,
   DrawerLayoutAndroid,
   InteractionManager,
+  TouchableWithoutFeedback,
   ListView,
   ScrollView,
   RefreshControl,
   ActivityIndicator,
+  Modal,
+  Dimensions,
+  BackAndroid,
 } from 'react-native';
+const shareImg = require('./imgs/share.png');
+const shareIconWechat = require('./imgs/share_icon_wechat.png');
+const shareIconMoments = require('./imgs/share_icon_moments.png');
 import DrawerLayout from 'react-native-drawer-layout';
-import ReadingTabBar from './component/ReadingTabBar';
 
 import About from './content/About';
 import FeedBack from './content/FeedBack';
@@ -42,6 +48,7 @@ class AppMain extends React.Component{
          }),
        articleList:[],
        loading:true,
+       isShareModal: false
       }
     this.renderNavigationView = this.renderNavigationView.bind(this); 
     this.renderItem = this.renderItem.bind(this); 
@@ -51,6 +58,7 @@ class AppMain extends React.Component{
 
   //组件挂载之后进行请求网络
   componentDidMount() {
+      BackAndroid.addEventListener('hardwareBackPress', this.goBack);
       //day/2015/08/07
       request('day/2016/07/28','get')
         .then((result) => {
@@ -60,6 +68,18 @@ class AppMain extends React.Component{
            ToastAndroid.show('加载失败,请重试'+e,ToastAndroid.SHORT);
           this.setState({loading:false});
       });
+  }
+ componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', this.goBack);
+ }
+ goBack() {
+    if (this.state.isShareModal) {
+       this.setState({
+        isShareModal: false
+      });
+      return true;
+     }
+    return naviGoBack(this.props.navigator);
   }
 
   //进行侧面功能
@@ -71,6 +91,7 @@ class AppMain extends React.Component{
         
         break;
       case 1:
+        this.setState({isShareModal: true});
         break;
       case 2:
         InteractionManager.runAfterInteractions(() => {
@@ -180,6 +201,94 @@ class AppMain extends React.Component{
       />
     );
    }
+  renderSpinner() {
+    const { route } = this.props;
+    return (
+      <TouchableWithoutFeedback
+        onPress={() => {
+          this.setState({
+            isShareModal: false
+          });
+        }}
+      >
+        <View
+          key={'spinner'}
+          style={styles.spinner}
+        >
+          <View style={styles.spinnerContent}>
+            <Text style={[styles.spinnerTitle, { fontSize: 20, color: 'black' }]}>
+              分享到
+            </Text>
+            <View style={{ flexDirection: 'row', marginTop: 20 }}>
+              <TouchableOpacity
+                style={{ flex: 1 }}
+                onPress={() => {
+                  WeChat.isWXAppInstalled()
+                    .then((isInstalled) => {
+                      if (isInstalled) {
+                        WeChat.shareToSession({
+                          title: route.article.title,
+                          description: '分享自:LCodeGank',
+                          thumbImage: route.article.contentImg,
+                          type: 'news',
+                          webpageUrl: route.article.url
+                        })
+                        .catch((error) => {
+                          toastShort(error.message);
+                        });
+                      } else {
+                        toastShort('没有安装微信软件，请您安装微信之后再试');
+                      }
+                    });
+                }}
+              >
+                <View style={styles.shareContent}>
+                  <Image
+                    style={styles.shareIcon}
+                    source={shareIconWechat}
+                  />
+                  <Text style={styles.spinnerTitle}>
+                    微信
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{ flex: 1 }}
+                onPress={() => {
+                  WeChat.isWXAppInstalled()
+                    .then((isInstalled) => {
+                      if (isInstalled) {
+                        WeChat.shareToTimeline({
+                          title: `[@LCodeGank]${route.article.title}`,
+                          thumbImage: route.article.contentImg,
+                          type: 'news',
+                          webpageUrl: route.article.url
+                        })
+                        .catch((error) => {
+                          toastShort(error.message);
+                        });
+                      } else {
+                        toastShort('没有安装微信软件，请您安装微信之后再试');
+                      }
+                    });
+                }}
+              >
+                <View style={styles.shareContent}>
+                  <Image
+                    style={styles.shareIcon}
+                    source={shareIconMoments}
+                  />
+                  <Text style={styles.spinnerTitle}>
+                    朋友圈
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    );
+  } 
   //侧滑菜单功能视图
   renderNavigationView() {
     return(
@@ -236,10 +345,9 @@ class AppMain extends React.Component{
             </View>
           </TouchableOpacity>
           <View style={{backgroundColor:'#d3d3d3',width:300,height:0.5}}></View> 
-      </View>
+         </View>
       );
   } 
-
   render(){
     const {navigator} = this.props;
     return (
@@ -261,6 +369,18 @@ class AppMain extends React.Component{
                   this.state.articleList === undefined ? [] : this.state.articleList))}
           </View>
         </View>
+        <Modal
+          animationType="fade"
+          visible={this.state.isShareModal}
+          transparent
+          onRequestClose={() => {
+            this.setState({
+              isShareModal: false
+            });
+          }}
+         >
+      {this.renderSpinner()}
+      </Modal>  
       </DrawerLayout>
     );
   }
@@ -331,6 +451,36 @@ let styles = StyleSheet.create({
     listView: {
     backgroundColor: '#eeeeec'
   },
+  spinner: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.65)'
+  },
+  spinnerContent: {
+    justifyContent: 'center',
+    width: Dimensions.get('window').width * (7 / 10),
+    height: Dimensions.get('window').width * (7 / 10) * 0.68,
+    backgroundColor: '#fcfcfc',
+    padding: 20,
+    borderRadius: 5
+  },
+  spinnerTitle: {
+    fontSize: 18,
+    color: '#313131',
+    textAlign: 'center',
+    marginTop: 5
+  },
+  shareContent: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  shareIcon: {
+    width: 40,
+    height: 40
+  }
 });
 
 export default AppMain;

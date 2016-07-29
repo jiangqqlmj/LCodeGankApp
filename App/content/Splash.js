@@ -40,7 +40,7 @@ class Splash extends React.Component {
         source={require('../imgs/welcome_gank.png')}
        />
        <View style={{flex:1,alignItems:'flex-end',flexDirection:'row',marginBottom:10}}>
-          <Text style={{flex:1,color:'#fff',fontSize:18,textAlign:'center'}}>干货集中营(gank.io) Version:1.0 </Text>
+          <Text style={{flex:1,color:'#fff',fontSize:18,textAlign:'center'}}>干货集中营(gank.io) Version:0.1.0 </Text>
        </View>
       </View>
     );

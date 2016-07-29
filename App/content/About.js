@@ -1,5 +1,7 @@
+/**
+ * 关于我们
+ */
 'use strict';
-
 import React from 'react';
 import {
   Dimensions,
@@ -25,61 +27,37 @@ class About extends React.Component {
             </TouchableOpacity>
             <Text style={{fontSize:16,flex:1,color:'#fff',textAlignVertical:'center',marginLeft:10}}>关于我们</Text>
           </View>
-          <TouchableOpacity>
-            <View style={styles.containerItem}>
-               <Text style={styles.containerItem_title}>Android：学习AIDL，这一篇文章就够了(上)Android：学习AIDL，这一篇文章就够了(上)Android：学习AIDL，这一篇文章就够了(上)</Text>
-               <View style={{flex:1,flexDirection:'row',marginTop:3}}>
-                  <Text style={styles.containerItem_title_sub}>推荐人:Dear宅学长</Text>
-                  <Text style={styles.containerItem_time_sub}>2015-07-22 21:50</Text>
+          <View style={{alignItems:'center',marginTop:10}}>
+             <Image source={require('../imgs/ic_launcher.png')} style={{width:120,height:120}}/>
+             <Text style={styles.text_version}>V0.1.0</Text>
+          </View>
+          <View style={{alignItems:'center',marginTop:10}}>
+            <Text style={{fontSize:15,color:'black'}}>干货集中营,每天午间更新福利哦~</Text>
+          </View>
+          <View style={{marginBottom:10,flex:1}}>
+             <View style={styles.text_right}>
+               <View style={{flexDirection:'row'}}>
+                  <Text>免责声明:所有内容均来自:</Text>
+                  <Text style={{color:'#63B8FF'}}>http://gank.io</Text>
+               </View>   
+               <View>
+                  <Text style={{color:'#63B8FF'}}>https://github.com/jiangqqlmj/LCodeGankApp</Text>
                </View>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <View style={styles.containerItem}>
-               <Image 
-                 source={{uri:'http://ww4.sinaimg.cn/large/610dc034jw1f5xwnxj2vmj20dw0dwjsc.jpg'}}
-                 style={{width:Dimensions.get('window').width,height:100}}
-               />
-               <View style={{flex:1,flexDirection:'row',marginTop:3}}>
-                  <Text style={styles.containerItem_title_sub}>推荐人:Dear宅学长</Text>
-                  <Text style={styles.containerItem_time_sub}>2015-07-22 21:50</Text>
-               </View>
-            </View>
-          </TouchableOpacity>
+             </View>
+          </View>
       </View>
     );
   }
 }
 let styles = StyleSheet.create({
-    content:{
-      backgroundColor:'#fff',
+   text_version:{
+      color:'#ddd', 
+   },
+   text_right:{
+      alignSelf:'center',
+      alignItems:'center',
       flex:1,
-    },
-    containerItem:{
-      flexDirection: 'column',
-      backgroundColor: '#fcfcfc',
-      marginTop:2,
-      marginBottom:2,
-      margin:5,
-      padding:5,
-      borderBottomColor: '#ddd',
-      borderBottomWidth: 1
-    },
-    containerItem_title:{
-      color:'#63B8FF',
-      flex:1,
-      fontSize:16,
-    },
-    containerItem_title_sub:{
-      color:'#cccccc',
-      fontSize:13,
-    },
-    containerItem_time_sub:{
-      color:'#cccccc',
-      fontSize:13,
-      flex:1,
-      alignItems:'flex-end',
-      textAlign:'right',
-    }
+      justifyContent:'flex-end'
+   }
 });
 export default About;

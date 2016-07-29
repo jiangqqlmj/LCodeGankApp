@@ -1,0 +1,633 @@
+// 通过将设置放入设置文件中来覆盖设置。
+// See http://go.microsoft.com/fwlink/?LinkId=808995 for the most commonly used settings.
+{
+
+// 编辑器配置
+
+    // 控制字体系列。
+    "editor.fontFamily": "Menlo, Monaco, 'Courier New', monospace",
+
+    // 控制字体大小。
+    "editor.fontSize": 13,
+
+    // 控制行高。
+    "editor.lineHeight": 0,
+
+    // 控制行号的可见性
+    "editor.lineNumbers": true,
+
+    // 控制字形边距的可见性
+    "editor.glyphMargin": false,
+
+    // 显示垂直标尺的列
+    "editor.rulers": [],
+
+    // 执行文字相关的导航或操作时将用作文字分隔符的字符
+    "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?",
+
+    // 一个制表符等于的空格数。
+    "editor.tabSize": 4,
+
+    // 按 "Tab" 时插入空格。
+    "editor.insertSpaces": true,
+
+    // 当打开文件时，将基于文件内容检测 "editor.tabSize" 和 "editor.insertSpaces"。
+    "editor.detectIndentation": true,
+
+    // 控制选取范围是否有圆角
+    "editor.roundedSelection": true,
+
+    // 控制编辑器是否可以滚动到最后一行之后
+    "editor.scrollBeyondLastLine": true,
+
+    // 控制在多少个字符后编辑器会自动换到下一行。将其设置为 0 则将打开视区宽度换行(自动换行)。将其设置为 -1 则将强制编辑器始终不换行。
+    "editor.wrappingColumn": 300,
+
+    // 控制换行的行的缩进。可以是"none"、 "same" 或 "indent"。
+    "editor.wrappingIndent": "same",
+
+    // 要对鼠标滚轮滚动事件的 "deltaX" 和 "deltaY" 使用的乘数 
+    "editor.mouseWheelScrollSensitivity": 1,
+
+    // 控制键入时是否应显示快速建议
+    "editor.quickSuggestions": true,
+
+    // 控制延迟多少毫秒后将显示快速建议
+    "editor.quickSuggestionsDelay": 10,
+
+    // Enables parameter hints
+    "editor.parameterHints": true,
+
+    // 控制编辑器是否应该在左括号后自动插入右括号
+    "editor.autoClosingBrackets": true,
+
+    // 控制编辑器是否应在键入后自动设置行的格式
+    "editor.formatOnType": false,
+
+    // 控制键入触发器字符时是否应自动显示建议
+    "editor.suggestOnTriggerCharacters": true,
+
+    // 控制除了 "Tab" 以外，是否还应在 "Enter" 时接受建议。帮助避免“插入新行”或“接受建议”之间的歧义。
+    "editor.acceptSuggestionOnEnter": true,
+
+    // 控制编辑器是否应突出显示选项的近似匹配
+    "editor.selectionHighlight": true,
+
+    // 控制可在概述标尺同一位置显示的效果数量
+    "editor.overviewRulerLanes": 3,
+
+    // 控制光标闪烁动画，接受的值为'blink'、'visible' 和 'hidden'
+    "editor.cursorBlinking": "blink",
+
+    // Zoom the font of the editor when using mouse wheel and holding Ctrl
+    "editor.mouseWheelZoom": false,
+
+    // 控制光标样式，接受的值为 'block' 和 'line'
+    "editor.cursorStyle": "line",
+
+    // 启用字体连字
+    "editor.fontLigatures": false,
+
+    // 控制光标是否应隐藏在概述标尺中。
+    "editor.hideCursorInOverviewRuler": false,
+
+    // 控制编辑器是否应呈现空白字符
+    "editor.renderWhitespace": false,
+
+    // Controls whether the editor should render control characters
+    "editor.renderControlCharacters": false,
+
+    // Controls whether the editor should render indent guides
+    "editor.renderIndentGuides": false,
+
+    // 控制编辑器是否显示支持它的模式的参考信息
+    "editor.referenceInfos": true,
+
+    // 控制编辑器是否启用代码折叠功能
+    "editor.folding": true,
+
+    // 在制表位后插入和删除空格
+    "editor.useTabStops": true,
+
+    // 删除尾随自动插入的空格
+    "editor.trimAutoWhitespace": true,
+
+    // Keep peek editors open even when double clicking their content or when hitting Escape.
+    "editor.stablePeek": false,
+
+    // 控制 Diff 编辑器以并排或内联形式显示差异
+    "diffEditor.renderSideBySide": true,
+
+    // 控制差异编辑器是否将对前导空格或尾随空格的更改显示为差异
+    "diffEditor.ignoreTrimWhitespace": true,
+
+    // 启用基于字的建议。
+    "editor.wordBasedSuggestions": true,
+
+
+// Emmet 配置
+
+    // 启用后，按 TAB 键时，将展开 Emmet 缩写。
+    "emmet.triggerExpansionOnTab": true,
+
+    // Preferences used to modify behavior of some actions and resolvers of Emmet.
+    "emmet.preferences": {},
+
+    // Define profile for specified syntax or use your own profile with specific rules.
+    "emmet.syntaxProfiles": {},
+
+
+// Workbench
+
+    // Controls if opened editors should show in tabs or not.
+    "workbench.editor.showTabs": true,
+
+    // Controls if opened editors show as preview. Preview editors are reused until they are kept (e.g. via double click or editing).
+    "workbench.editor.enablePreview": true,
+
+    // Controls if opened editors from quick open show as preview. Preview editors are reused until they are kept (e.g. via double click or editing).
+    "workbench.editor.enablePreviewFromQuickOpen": true,
+
+    // Controls where editors open. Select 'left' or 'right' to open editors to the left or right of the current active one. Select 'first' or 'last' to open editors independently from the currently active one.
+    "workbench.editor.openPositioning": "right",
+
+
+// 窗口配置
+
+    // 启用后，将在新窗口中打开文件，而不是重复使用现有实例。
+    "window.openFilesInNewWindow": true,
+
+    // 控制重启后重新打开文件夹的方式。选择“none”表示永不重新打开文件夹，选择“one”表示重新打开最后使用的一个文件夹，或选择“all”表示打开上次会话的所有文件夹。
+    "window.reopenFolders": "one",
+
+    // Controls if a window should restore to full screen mode if it was exited in full screen mode.
+    "window.restoreFullscreen": false,
+
+    // 调整窗口的缩放级别。原始大小是 0，每次递增(例如 1)或递减(例如 -1)表示放大或缩小 20%。也可以输入小数以便以更精细的粒度调整缩放级别。
+    "window.zoomLevel": 0,
+
+
+// 文件配置
+
+    // 配置 glob 模式以排除文件和文件夹。
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.DS_Store": true
+    },
+
+    // 配置语言的文件关联(如: "*.extension": "html")。这些关联的优先级高于已安装语言的默认关联。
+    "files.associations": {},
+
+    // 读取和编写文件时将使用的默认字符集编码。
+    "files.encoding": "utf8",
+
+    // 默认行尾字符。
+    "files.eol": "\n",
+
+    // 启用后，将在保存文件时剪裁尾随空格。
+    "files.trimTrailingWhitespace": false,
+
+    // 控制已更新文件的自动保存。接受的值:“off”、“afterDelay”、“onFocusChange”。如果设置为“afterDelay”，则可在 "files.autoSaveDelay" 中配置延迟。
+    "files.autoSave": "off",
+
+    // 控制延迟(以秒为单位)，在该延迟后将自动保存更新后的文件。仅在 "files.autoSave" 设置为“afterDelay”时适用。
+    "files.autoSaveDelay": 1000,
+
+    // 配置文件路径的 glob 模式以从文件监视排除。更改此设置要求重启。如果在启动时遇到 Code 消耗大量 CPU 时间，则可以排除大型文件夹以减少初始加载。
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/node_modules/**": true
+    },
+
+
+// 文件资源管理器配置
+
+    // Number of editors shown in the Open Editors pane. Set it to 0 to hide the pane.
+    "explorer.openEditors.visible": 9,
+
+    // 控制工作文件部分的高度是否应动态适应元素数量。
+    "explorer.openEditors.dynamicHeight": true,
+
+    // 控制资源管理器是否应在打开文件时自动显示它们。
+    "explorer.autoReveal": true,
+
+
+// 搜索配置
+
+    // 配置 glob 模式以在搜索中排除文件和文件夹。从 files.exclude 设置中继承所有 glob 模式。
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true
+    },
+
+
+// 更新配置
+
+    // 配置从中接收更新的更新频道。更改后需要重启。
+    "update.channel": "default",
+
+
+// GIT 配置
+
+    // 是否启用了 GIT
+    "git.enabled": true,
+
+    // 可执行 GIT 的路径
+    "git.path": null,
+
+    // 是否启用了自动提取。
+    "git.autofetch": true,
+
+    // Whether long commit messages should be warned about.
+    "git.enableLongCommitWarning": true,
+
+    // Always allow large repositories to be managed by Code.
+    "git.allowLargeRepositories": false,
+
+
+// HTTP 配置
+
+    // 要使用的代理设置。如果尚未设置，则将从 http_proxy 和 https_proxy 环境变量获取
+    "http.proxy": "",
+
+    // 是否应根据提供的 CA 列表验证代理服务器证书。
+    "http.proxyStrictSSL": true,
+
+
+// CSS
+
+    // Controls CSS validation and problem severities.
+
+    // Enables or disables all validations
+    "css.validate": true,
+
+    // When using a vendor-specific prefix make sure to also include all other vendor-specific properties
+    "css.lint.compatibleVendorPrefixes": "ignore",
+
+    // When using a vendor-specific prefix also include the standard property
+    "css.lint.vendorPrefix": "warning",
+
+    // Do not use duplicate style definitions
+    "css.lint.duplicateProperties": "ignore",
+
+    // Do not use empty rulesets
+    "css.lint.emptyRules": "warning",
+
+    // Import statements do not load in parallel
+    "css.lint.importStatement": "ignore",
+
+    // Do not use width or height when using padding or border
+    "css.lint.boxModel": "ignore",
+
+    // The universal selector (*) is known to be slow
+    "css.lint.universalSelector": "ignore",
+
+    // No unit for zero needed
+    "css.lint.zeroUnits": "ignore",
+
+    // @font-face rule must define 'src' and 'font-family' properties
+    "css.lint.fontFaceProperties": "warning",
+
+    // Hex colors must consist of three or six hex numbers
+    "css.lint.hexColorLength": "error",
+
+    // Invalid number of parameters
+    "css.lint.argumentsInColorFunction": "error",
+
+    // Unknown property.
+    "css.lint.unknownProperties": "warning",
+
+    // IE hacks are only necessary when supporting IE7 and older
+    "css.lint.ieHack": "ignore",
+
+    // Unknown vendor specific property.
+    "css.lint.unknownVendorSpecificProperties": "ignore",
+
+    // Property is ignored due to the display. E.g. with 'display: inline', the width, height, margin-top, margin-bottom, and float properties have no effect
+    "css.lint.propertyIgnoredDueToDisplay": "warning",
+
+    // Avoid using !important. It is an indication that the specificity of the entire CSS has gotten out of control and needs to be refactored.
+    "css.lint.important": "ignore",
+
+    // Avoid using 'float'. Floats lead to fragile CSS that is easy to break if one aspect of the layout changes.
+    "css.lint.float": "ignore",
+
+    // Selectors should not contain IDs because these rules are too tightly coupled with the HTML.
+    "css.lint.idSelector": "ignore",
+
+
+// SCSS (Sass)
+
+    // Controls SCSS validation and problem severities.
+
+    // Enables or disables all validations
+    "scss.validate": true,
+
+    // When using a vendor-specific prefix make sure to also include all other vendor-specific properties
+    "scss.lint.compatibleVendorPrefixes": "ignore",
+
+    // When using a vendor-specific prefix also include the standard property
+    "scss.lint.vendorPrefix": "warning",
+
+    // Do not use duplicate style definitions
+    "scss.lint.duplicateProperties": "ignore",
+
+    // Do not use empty rulesets
+    "scss.lint.emptyRules": "warning",
+
+    // Import statements do not load in parallel
+    "scss.lint.importStatement": "ignore",
+
+    // Do not use width or height when using padding or border
+    "scss.lint.boxModel": "ignore",
+
+    // The universal selector (*) is known to be slow
+    "scss.lint.universalSelector": "ignore",
+
+    // No unit for zero needed
+    "scss.lint.zeroUnits": "ignore",
+
+    // @font-face rule must define 'src' and 'font-family' properties
+    "scss.lint.fontFaceProperties": "warning",
+
+    // Hex colors must consist of three or six hex numbers
+    "scss.lint.hexColorLength": "error",
+
+    // Invalid number of parameters
+    "scss.lint.argumentsInColorFunction": "error",
+
+    // Unknown property.
+    "scss.lint.unknownProperties": "warning",
+
+    // IE hacks are only necessary when supporting IE7 and older
+    "scss.lint.ieHack": "ignore",
+
+    // Unknown vendor specific property.
+    "scss.lint.unknownVendorSpecificProperties": "ignore",
+
+    // Property is ignored due to the display. E.g. with 'display: inline', the width, height, margin-top, margin-bottom, and float properties have no effect
+    "scss.lint.propertyIgnoredDueToDisplay": "warning",
+
+    // Avoid using !important. It is an indication that the specificity of the entire CSS has gotten out of control and needs to be refactored.
+    "scss.lint.important": "ignore",
+
+    // Avoid using 'float'. Floats lead to fragile CSS that is easy to break if one aspect of the layout changes.
+    "scss.lint.float": "ignore",
+
+    // Selectors should not contain IDs because these rules are too tightly coupled with the HTML.
+    "scss.lint.idSelector": "ignore",
+
+
+// LESS
+
+    // Controls LESS validation and problem severities.
+
+    // Enables or disables all validations
+    "less.validate": true,
+
+    // When using a vendor-specific prefix make sure to also include all other vendor-specific properties
+    "less.lint.compatibleVendorPrefixes": "ignore",
+
+    // When using a vendor-specific prefix also include the standard property
+    "less.lint.vendorPrefix": "warning",
+
+    // Do not use duplicate style definitions
+    "less.lint.duplicateProperties": "ignore",
+
+    // Do not use empty rulesets
+    "less.lint.emptyRules": "warning",
+
+    // Import statements do not load in parallel
+    "less.lint.importStatement": "ignore",
+
+    // Do not use width or height when using padding or border
+    "less.lint.boxModel": "ignore",
+
+    // The universal selector (*) is known to be slow
+    "less.lint.universalSelector": "ignore",
+
+    // No unit for zero needed
+    "less.lint.zeroUnits": "ignore",
+
+    // @font-face rule must define 'src' and 'font-family' properties
+    "less.lint.fontFaceProperties": "warning",
+
+    // Hex colors must consist of three or six hex numbers
+    "less.lint.hexColorLength": "error",
+
+    // Invalid number of parameters
+    "less.lint.argumentsInColorFunction": "error",
+
+    // Unknown property.
+    "less.lint.unknownProperties": "warning",
+
+    // IE hacks are only necessary when supporting IE7 and older
+    "less.lint.ieHack": "ignore",
+
+    // Unknown vendor specific property.
+    "less.lint.unknownVendorSpecificProperties": "ignore",
+
+    // Property is ignored due to the display. E.g. with 'display: inline', the width, height, margin-top, margin-bottom, and float properties have no effect
+    "less.lint.propertyIgnoredDueToDisplay": "warning",
+
+    // Avoid using !important. It is an indication that the specificity of the entire CSS has gotten out of control and needs to be refactored.
+    "less.lint.important": "ignore",
+
+    // Avoid using 'float'. Floats lead to fragile CSS that is easy to break if one aspect of the layout changes.
+    "less.lint.float": "ignore",
+
+    // Selectors should not contain IDs because these rules are too tightly coupled with the HTML.
+    "less.lint.idSelector": "ignore",
+
+
+// HTML 配置
+
+    // 每行最大字符数(0 = 禁用)。
+    "html.format.wrapLineLength": 120,
+
+    // 标记列表，以逗号分隔，不应重设格式。"null" 默认为所有内联标记。
+    "html.format.unformatted": "a, abbr, acronym, b, bdo, big, br, button, cite, code, dfn, em, i, img, input, kbd, label, map, object, q, samp, script, select, small, span, strong, sub, sup, textarea, tt, var",
+
+    // 缩进 <head> 和 <body> 部分。
+    "html.format.indentInnerHtml": false,
+
+    // 是否要保留元素前面的现有换行符。仅适用于元素前，不适用于标记内或文本。
+    "html.format.preserveNewLines": true,
+
+    // 要保留在一个区块中的换行符的最大数量。对于无限制使用 "null"。
+    "html.format.maxPreserveNewLines": null,
+
+    // 格式和缩进 {{#foo}} 和 {{/foo}}。
+    "html.format.indentHandlebars": false,
+
+    // 以新行结束。
+    "html.format.endWithNewline": false,
+
+    // 标记列表，以逗号分隔，其前应有额外新行。"null" 默认为“标头、正文、/html”。
+    "html.format.extraLiners": "head, body, /html",
+
+
+// JSON
+
+    // Associate schemas to JSON files in the current project
+    "json.schemas": [],
+
+
+// Markdown
+
+    // A list of URLs or local paths to CSS style sheets to use from the markdown preview. Relative paths are interpreted relative to the folder open in the explorer. If there is no open folder, they are interpreted relative to the location of the markdown file. All '\' need to be written as '\\'.
+    "markdown.styles": [],
+
+
+// PHP 配置选项
+
+    // 不管 php 验证是否已启用。
+    "php.validate.enable": true,
+
+    // 指向可执行的 php。
+    "php.validate.executablePath": null,
+
+    // 不管 linter 是在 save 还是在 type 上运行。
+    "php.validate.run": "onSave",
+
+
+// TypeScript 配置
+
+    // 指定包含要使用的 tsserver 和 lib*.d.ts 文件的文件夹路径。
+    "typescript.tsdk": null,
+
+    // 启用对发送到 TS 服务器的消息进行跟踪
+    "typescript.tsserver.trace": "off",
+
+    // Enables experimental auto build. Requires 1.9 dev or 2.x tsserver version and a restart of VS Code after changing it.
+    "typescript.tsserver.experimentalAutoBuild": false,
+
+    // 完成函数的参数签名。
+    "typescript.useCodeSnippetsOnMethodSuggest": false,
+
+    // 启用/禁用 TypeScript 验证
+    "typescript.validate.enable": true,
+
+    // 定义逗号分隔符后面的空格处理
+    "typescript.format.insertSpaceAfterCommaDelimiter": true,
+
+    // 在 For 语句中，定义分号之后的空格处理
+    "typescript.format.insertSpaceAfterSemicolonInForStatements": true,
+
+    // 定义二进制运算符后面的空格处理
+    "typescript.format.insertSpaceBeforeAndAfterBinaryOperators": true,
+
+    // 定义控制流语句中的关键字之后的空格处理
+    "typescript.format.insertSpaceAfterKeywordsInControlFlowStatements": true,
+
+    // 定义匿名函数的函数关键字之后的空格处理
+    "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": true,
+
+    // 定义非空圆括号的左括号之后和右括号之前的空格处理。
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+
+    // 定义非空方括号的左括号之后和右括号之前的空格处理。
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
+
+    // 定义左大括号是否针对函数而放置在新的一行
+    "typescript.format.placeOpenBraceOnNewLineForFunctions": false,
+
+    // 定义左大括号是否针对控制块而放置在新的一行
+    "typescript.format.placeOpenBraceOnNewLineForControlBlocks": false,
+
+    // 启用/禁用 JavaScript 验证
+    "javascript.validate.enable": true,
+
+    // 定义逗号分隔符后面的空格处理
+    "javascript.format.insertSpaceAfterCommaDelimiter": true,
+
+    // 在 For 语句中，定义分号之后的空格处理
+    "javascript.format.insertSpaceAfterSemicolonInForStatements": true,
+
+    // 定义二进制运算符后面的空格处理
+    "javascript.format.insertSpaceBeforeAndAfterBinaryOperators": true,
+
+    // 定义控制流语句中的关键字之后的空格处理
+    "javascript.format.insertSpaceAfterKeywordsInControlFlowStatements": true,
+
+    // 定义匿名函数的函数关键字之后的空格处理
+    "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": true,
+
+    // 定义非空圆括号的左括号之后和右括号之前的空格处理。
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+
+    // 定义非空方括号的左括号之后和右括号之前的空格处理。
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
+
+    // 定义左大括号是否针对函数而放置在新的一行
+    "javascript.format.placeOpenBraceOnNewLineForFunctions": false,
+
+    // 定义左大括号是否针对控制块而放置在新的一行
+    "javascript.format.placeOpenBraceOnNewLineForControlBlocks": false,
+
+
+// 外部终端配置
+
+    // 自定义要在 Windows 上运行的终端。
+    "terminal.external.windowsExec": "cmd",
+
+    // Customizes which terminal application to run on OS X.
+    "terminal.external.osxExec": "Terminal.app",
+
+    // Customizes which terminal to run on Linux.
+    "terminal.external.linuxExec": "xterm",
+
+
+// Integrated Terminal
+
+    // The path of the shell that the terminal uses on Linux.
+    "terminal.integrated.shell.linux": "/bin/bash",
+
+    // The command line arguments to use when on the Linux terminal.
+    "terminal.integrated.shellArgs.linux": [],
+
+    // The path of the shell that the terminal uses on OS X.
+    "terminal.integrated.shell.osx": "/bin/bash",
+
+    // The command line arguments to use when on the OS X terminal.
+    "terminal.integrated.shellArgs.osx": [],
+
+    // The path of the shell that the terminal uses on Windows.
+    "terminal.integrated.shell.windows": "cmd.exe",
+
+    // Controls the font family of the terminal, this defaults to editor.fontFamily's value.
+    "terminal.integrated.fontFamily": "",
+
+    // Controls the font size of the terminal, this defaults to editor.fontSize's value.
+    "terminal.integrated.fontSize": 0,
+
+    // Controls the line height of the terminal, this defaults to normal.
+    "terminal.integrated.lineHeight": 0,
+
+
+// Problems View
+
+    // Controls if Problems view should automatically reveal files when opening them
+    "problems.autoReveal": true,
+
+
+// Telemetry
+
+    // Enable usage data and errors to be sent to Microsoft.
+    "telemetry.enableTelemetry": true,
+
+    // 启用要发送给 Microsoft 的故障报表。
+	// 此选项需重启才可生效。
+    "telemetry.enableCrashReporter": true,
+
+
+// Python configuration
+
+    // Controls the maximum number of problems produced by the server.
+    "python.maxNumberOfProblems": 100,
+
+    // The linter to use
+    "python.linter": "pyLint"
+
+}

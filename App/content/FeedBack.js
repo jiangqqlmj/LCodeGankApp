@@ -1,3 +1,6 @@
+/**
+ * 反馈页面
+ */
 'use strict';
 
 import React from 'react';
@@ -8,8 +11,8 @@ import {
 } from 'react-native';
 class FeedBack extends React.Component {
     constructor(props) {
-     super(props);
-    }
+     super(props);    
+}
     render(){
   	  return (
          <View>

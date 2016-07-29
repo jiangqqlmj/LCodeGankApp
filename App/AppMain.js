@@ -52,7 +52,7 @@ class AppMain extends React.Component{
   //组件挂载之后进行请求网络
   componentDidMount() {
       //day/2015/08/07
-      request('day/2016/07/22','get')
+      request('day/2016/07/28','get')
         .then((result) => {
            this.setState({articleList:result.results.Android,loading:false});
         })

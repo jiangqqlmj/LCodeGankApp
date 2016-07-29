@@ -3,6 +3,7 @@ package com.lcodegankapp;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
+import com.theweflex.react.WeChatPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,10 +32,10 @@ public class MainActivity extends ReactActivity {
      * A list of packages used by the app. If the app uses additional views
      * or modules besides the default ones, add more packages here.
      */
-    @Override
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage()
+                ,new WeChatPackage()
         );
     }
 }
